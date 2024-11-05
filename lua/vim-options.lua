@@ -2,11 +2,21 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
+-- Custom swap for tabs & spaces
+function ToggleTabsToSpaces()
+  if vim.o.expandtab then
+    vim.o.expandtab = false
+    print("Switched to Tabs")
+  else
+   vim.o.expandtab = true
+    print("Switched to Spaces")
+  end
+end
+vim.api.nvim_set_keymap('n', '<leader>tt', ':lua ToggleTabsToSpaces()<CR>', { noremap = true, silent = true })
 -- relativenumber
 vim.wo.relativenumber = true
 vim.wo.number = true
 -- Configure white space characters.
-vim.api.nvim_set_keymap('n', '<leader>tt', ':lua ToggleTabsSpaces()<CR>', { noremap = true, silent = true })
 vim.cmd [[
   highlight SpecialKey ctermfg=Black guifg=#0099cc
   highlight NonText ctermfg=Black guifg=#0099cc
