@@ -18,8 +18,8 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 -- Configure white space characters.
 vim.cmd [[
-  highlight SpecialKey ctermfg=Black guifg=#0099cc
-  highlight NonText ctermfg=Black guifg=#0099cc
+  highlight SpecialKey ctermfg=Black guifg=#6272a4
+  highlight NonText ctermfg=Black guifg=#6272a4
 ]]
 vim.api.nvim_set_hl(0, 'TrailingWhitespace', { bg='LightRed' })
 vim.api.nvim_create_autocmd('BufEnter', {
