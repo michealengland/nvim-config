@@ -45,3 +45,9 @@ vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
 vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+-- Clone file to current location.
+vim.api.nvim_create_user_command("Clone", function(opts)
+    local current_dir = vim.fn.expand("%:h")  -- Get current file's directory
+    local new_path = current_dir .. "/" .. opts.args
+    vim.cmd("write " .. new_path)  -- Save to new filename in the same directory
+end, { nargs = 1 })  -- Requires one argument
