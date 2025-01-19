@@ -4,17 +4,6 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set autoindent")
 vim.cmd("set smartindent")
--- Custom swap for tabs & spaces
-function ToggleTabsToSpaces()
-  if vim.o.expandtab then
-    vim.o.expandtab = false
-    print("Switched to Tabs")
-  else
-   vim.o.expandtab = true
-    print("Switched to Spaces")
-  end
-end
-vim.api.nvim_set_keymap('n', '<leader>tt', ':lua ToggleTabsToSpaces()<CR>', { noremap = true, silent = true })
 -- relativenumber
 vim.wo.relativenumber = true
 vim.wo.number = true
@@ -47,3 +36,14 @@ vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
 vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+-- Custom swap for tabs & spaces
+function ToggleTabsToSpaces()
+  if vim.o.expandtab then
+    vim.o.expandtab = false
+    print("Switched to Tabs")
+  else
+   vim.o.expandtab = true
+    print("Switched to Spaces")
+  end
+end
+vim.api.nvim_set_keymap('n', '<leader>tt', ':lua ToggleTabsToSpaces()<CR>', { noremap = true, silent = true })
