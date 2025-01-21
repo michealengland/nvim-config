@@ -18,9 +18,10 @@ return {
           "astro",
           "html",
           "cssls",
+          "ts_ls",
           "tailwindcss",
           "lua_ls"
-        }
+        },
       })
     end
   },
@@ -37,13 +38,19 @@ return {
         capabilities = capabilities
       })
       lspconfig.ts_ls.setup({
-        capabilities = capabilities
-      })
-      lspconfig["astro"].setup({
         capabilities = capabilities,
-        -- on_attach = on_attach,
-        filetypes = { "astro" }
+        filetypes = {
+          "astro",
+          "javascript",
+          "typescript",
+          "vue",
+        },
       })
+      require'lspconfig'.astro.setup{
+        capabilities = capabilities,
+        on_attach = require("mason-lspconfig").on_attach,
+        filetypes = { "astro" }
+      }
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
