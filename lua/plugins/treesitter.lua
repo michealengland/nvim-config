@@ -10,7 +10,8 @@ return {
           "html",
           "lua",
           "astro",
-          "css"
+          "css",
+          "php"
         },
         auto_install = true,
         highlight = { enable = true },

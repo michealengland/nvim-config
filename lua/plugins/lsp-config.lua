@@ -3,7 +3,11 @@ return {
     "williamboman/mason.nvim",
     lazy = false,
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        ensure_installed = {
+          "intelephense",
+        }
+      })
     end,
   },
   {
@@ -14,13 +18,15 @@ return {
     },
     config = function()
       require("mason-lspconfig").setup({
+        automatic_enable = false,
         ensure_installed = {
           "astro",
           "html",
           "cssls",
           "ts_ls",
           "tailwindcss",
-          "lua_ls"
+          "lua_ls",
+          "intelephense",
         },
       })
     end
@@ -51,6 +57,24 @@ return {
         on_attach = require("mason-lspconfig").on_attach,
         filetypes = { "astro" }
       }
+      -- PHP Intellisense
+      lspconfig.intelephense.setup({
+        capabilities = capabilities,
+        settings = {
+          intelephense = {
+            files = {
+              maxSize = 1000000;
+            };
+            format = { enable = false }, -- if you're using phpcbf
+            environment = {
+              includePaths = {
+                vim.fn.expand("~/.intelephense/wp-src/wp-includes"),
+                vim.fn.expand("~/.intelephense/wp-src/wp-admin"),
+              }
+            },
+          }
+        }
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
