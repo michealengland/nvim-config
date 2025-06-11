@@ -6,7 +6,7 @@ return {
       require("mason").setup({
         ensure_installed = {
           "intelephense",
-        }
+        },
       })
     end,
   },
@@ -29,19 +29,19 @@ return {
           "intelephense",
         },
       })
-    end
+    end,
   },
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
 
       lspconfig.html.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.lua_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
@@ -52,34 +52,34 @@ return {
           "vue",
         },
       })
-      require'lspconfig'.astro.setup{
+      require("lspconfig").astro.setup({
         capabilities = capabilities,
         on_attach = require("mason-lspconfig").on_attach,
-        filetypes = { "astro" }
-      }
+        filetypes = { "astro" },
+      })
       -- PHP Intellisense
       lspconfig.intelephense.setup({
         capabilities = capabilities,
         settings = {
           intelephense = {
             files = {
-              maxSize = 1000000;
-            };
+              maxSize = 1000000,
+            },
             format = { enable = false }, -- if you're using phpcbf
             environment = {
               includePaths = {
                 vim.fn.expand("~/.intelephense/wp-src/wp-includes"),
                 vim.fn.expand("~/.intelephense/wp-src/wp-admin"),
-              }
+              },
             },
-          }
-        }
+          },
+        },
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-    end
+    end,
   },
 }

@@ -11,12 +11,12 @@ return {
           "lua",
           "astro",
           "css",
-          "php"
+          "php",
         },
         auto_install = true,
         highlight = { enable = true },
-        indent = { enable = true }
+        indent = { enable = true },
       })
-    end
-  }
+    end,
+  },
 }
