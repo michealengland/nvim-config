@@ -4,6 +4,8 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set autoindent")
 vim.cmd("set smartindent")
+-- Change Leader key to space.
+vim.g.mapleader = " "
 -- relativenumber
 vim.wo.relativenumber = true
 vim.wo.number = true
@@ -22,11 +24,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 )
 vim.o.list = true
 vim.o.listchars = "tab: →,lead:.,trail:."
-
--- Unsure.
-vim.g.mapleader = " "
 vim.g.background = "light"
-
 vim.opt.swapfile = false
 
 -- Navigate vim panes better
