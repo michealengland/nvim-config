@@ -97,6 +97,32 @@ return {
           },
         },
       })
+      -- Necessary for CSS autocomplete.
+      -- Requires `npm install -g vscode-langservers-extracted`
+      require("lspconfig").cssls.setup({
+        capabilities = capabilities,
+        cmd = { "vscode-css-language-server", "--stdio" },
+        filetypes = { "css", "scss", "less" },
+        settings = {
+          css = { validate = true },
+          scss = { validate = true },
+          less = { validate = true },
+        },
+      })
+      -- Stylelint should be configured at project level.
+      -- Run `npm init stylelint` in project root.
+      require("lspconfig").stylelint_lsp.setup({
+        filetypes = { "css", "scss", "less", "sass" },
+        root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
+        settings = {
+          stylelintplus = {
+            -- see available options in stylelint-lsp documentation
+          },
+        },
+        on_attach = function(client)
+          client.server_capabilities.document_formatting = false
+        end,
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
