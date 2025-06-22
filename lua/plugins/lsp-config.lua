@@ -21,12 +21,13 @@ return {
         automatic_enable = false,
         ensure_installed = {
           "astro",
-          "html",
           "cssls",
-          "ts_ls",
-          "tailwindcss",
-          "lua_ls",
+          "html",
           "intelephense",
+          "lua_ls",
+          "stylelint_lsp",
+          "tailwindcss",
+          "ts_ls",
         },
       })
     end,
