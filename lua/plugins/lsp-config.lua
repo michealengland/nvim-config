@@ -79,6 +79,23 @@ return {
         on_attach = require("mason-lspconfig").on_attach,
         filetypes = { "astro" },
       })
+      -- Necessary for Tailwind Intellisense.
+      --npm install -g @tailwindcss/language-server
+      lspconfig.tailwindcss.setup({
+        capabilities = capabilities,
+        filetypes = {
+          "html",
+          "css",
+          "scss",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "vue",
+          "svelte",
+          "astro",
+        },
+      })
       -- PHP Intellisense
       lspconfig.intelephense.setup({
         capabilities = capabilities,
