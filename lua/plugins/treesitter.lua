@@ -6,12 +6,17 @@ return {
       local config = require("nvim-treesitter.configs")
       config.setup({
         ensure_installed = {
-          "javascript",
-          "html",
-          "lua",
           "astro",
           "css",
+          "html",
+          "javascript",
+          "jsdoc",
+          "lua",
           "php",
+          "phpdoc",
+          "python",
+          "scss",
+          "typescript",
         },
         auto_install = true,
         highlight = { enable = true },
