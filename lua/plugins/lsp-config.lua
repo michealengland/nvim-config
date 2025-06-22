@@ -78,6 +78,12 @@ return {
         capabilities = capabilities,
         on_attach = require("mason-lspconfig").on_attach,
         filetypes = { "astro" },
+        -- IMPORTANT: Point to mason package for typescript to resolve error.
+        init_options = {
+          typescript = {
+            tsdk = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
+          },
+        },
       })
       -- Necessary for Tailwind Intellisense.
       --npm install -g @tailwindcss/language-server
