@@ -38,8 +38,29 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
 
+      -- HTML LSP requires npm install -g vscode-langservers-extracted
+      -- We typically don't want to include this in projects.
       lspconfig.html.setup({
         capabilities = capabilities,
+        cmd = { "vscode-html-language-server", "--stdio" },
+        filetypes = { "html" },
+        settings = {
+          html = {
+            -- See https://code.visualstudio.com/docs/languages/html#_formatting for details.
+            format = {
+              enable = true,
+              extraLiners = "",
+              indentHandlebars = true,
+              indentInnerHtml = true,
+              insertSpaces = true,
+              maxPreserveNewLines = 0,  -- explicitly limit preserved newlines
+              preserveNewLines = false, -- prevent blank lines
+              tabSize = 2,
+              unformatted = "pre,code,span",
+              wrapLineLength = 120,
+            },
+          },
+        },
       })
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
