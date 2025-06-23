@@ -1,15 +1,21 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
 vim.cmd("set autoindent")
+vim.cmd("set expandtab")
+vim.cmd("set shiftwidth=2")
 vim.cmd("set smartindent")
+vim.cmd("set softtabstop=2")
+vim.cmd("set tabstop=2")
+
 -- Change Leader key to space.
 vim.g.mapleader = " "
--- relativenumber
-vim.wo.relativenumber = true
+
+-- Relative Numbers.
 vim.wo.number = true
--- Configure white space characters.
+vim.wo.relativenumber = true
+
+-- Display white space such as tabs, spaces characters.
+-- Based on https://www.manjotbal.ca/blog/neovim-whitespace.html
+-- ASCII Symbol Picker https://symbl.cc/en/002E/
+-- See Available Colors `:h cterm-colors`
 vim.cmd([[
   highlight SpecialKey ctermfg=Black guifg=#6272a4
   highlight NonText ctermfg=Black guifg=#6272a4
@@ -27,14 +33,16 @@ vim.o.listchars = "tab: →,lead:.,trail:."
 vim.g.background = "light"
 vim.opt.swapfile = false
 
--- Navigate vim panes better
+-- Navigate vim panes with motions.
 vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
 vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
 vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 
+-- Hide current search.
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
--- Custom swap for tabs & spaces
+
+-- Toggle between tabs & spaces.
 function ToggleTabsToSpaces()
   if vim.o.expandtab then
     vim.o.expandtab = false
