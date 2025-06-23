@@ -7,6 +7,5 @@ return {
     -- Configuration Details https://github.com/folke/snacks.nvim/tree/main?tab=readme-ov-file#-features
     indent = { enabled = true },
     notifier = { enabled = true },
-    words = { enabled = true },
   },
 }
