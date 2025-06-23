@@ -3,11 +3,7 @@ return {
     "williamboman/mason.nvim",
     lazy = false,
     config = function()
-      require("mason").setup({
-        ensure_installed = {
-          "intelephense",
-        },
-      })
+      require("mason").setup()
     end,
   },
   {
@@ -38,8 +34,36 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
 
-      -- HTML LSP requires npm install -g vscode-langservers-extracted
-      -- We typically don't want to include this in projects.
+      -- Astro JS
+      -- Requires `npm install -g @astrojs/language-server`
+      require("lspconfig").astro.setup({
+        capabilities = capabilities,
+        on_attach = require("mason-lspconfig").on_attach,
+        filetypes = { "astro" },
+        -- IMPORTANT: Point to mason package for typescript to resolve error.
+        init_options = {
+          typescript = {
+            tsdk = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
+          },
+        },
+      })
+
+      -- CSS
+      -- Requires `npm install -g vscode-langservers-extracted`
+      require("lspconfig").cssls.setup({
+        capabilities = capabilities,
+        cmd = { "vscode-css-language-server", "--stdio" },
+        filetypes = { "css", "less", "sass", "scss" },
+        settings = {
+          css = { validate = true },
+          less = { validate = true },
+          sass = { validate = true },
+          scss = { validate = true },
+        },
+      })
+
+      -- HTML
+      -- Requires `npm install -g vscode-langservers-extracted`
       lspconfig.html.setup({
         capabilities = capabilities,
         cmd = { "vscode-html-language-server", "--stdio" },
@@ -53,7 +77,7 @@ return {
               indentHandlebars = true,
               indentInnerHtml = true,
               insertSpaces = true,
-              maxPreserveNewLines = 0,  -- explicitly limit preserved newlines
+              maxPreserveNewLines = 0, -- explicitly limit preserved newlines
               preserveNewLines = false, -- prevent blank lines
               tabSize = 2,
               unformatted = "pre,code,span",
@@ -62,47 +86,10 @@ return {
           },
         },
       })
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
-        filetypes = {
-          "astro",
-          "javascript",
-          "typescript",
-          "vue",
-        },
-      })
-      require("lspconfig").astro.setup({
-        capabilities = capabilities,
-        on_attach = require("mason-lspconfig").on_attach,
-        filetypes = { "astro" },
-        -- IMPORTANT: Point to mason package for typescript to resolve error.
-        init_options = {
-          typescript = {
-            tsdk = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
-          },
-        },
-      })
-      -- Necessary for Tailwind Intellisense.
-      --npm install -g @tailwindcss/language-server
-      lspconfig.tailwindcss.setup({
-        capabilities = capabilities,
-        filetypes = {
-          "html",
-          "css",
-          "scss",
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "vue",
-          "svelte",
-          "astro",
-        },
-      })
-      -- PHP Intellisense
+
+      -- PHP Intelephense
+      -- Requires PHPCS & Local clone of WordPress.
+      -- gh repo clone WordPress/WordPress
       lspconfig.intelephense.setup({
         capabilities = capabilities,
         settings = {
@@ -120,22 +107,16 @@ return {
           },
         },
       })
-      -- Necessary for CSS autocomplete.
-      -- Requires `npm install -g vscode-langservers-extracted`
-      require("lspconfig").cssls.setup({
+
+      -- Lua
+      lspconfig.lua_ls.setup({
         capabilities = capabilities,
-        cmd = { "vscode-css-language-server", "--stdio" },
-        filetypes = { "css", "scss", "less" },
-        settings = {
-          css = { validate = true },
-          scss = { validate = true },
-          less = { validate = true },
-        },
       })
-      -- Stylelint should be configured at project level.
-      -- Run `npm init stylelint` in project root.
+
+      -- Stylelint
+      -- Requires stylelint in project root. Ex: `npm init stylelint`.
       require("lspconfig").stylelint_lsp.setup({
-        filetypes = { "css", "scss", "less", "sass" },
+        filetypes = { "css", "less", "sass", "scss" },
         root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
         settings = {
           stylelintplus = {
@@ -145,6 +126,37 @@ return {
         on_attach = function(client)
           client.server_capabilities.document_formatting = false
         end,
+      })
+
+      -- TailwindCSS Intelliesense
+      -- Requires `npm install -g @tailwindcss/language-server`.
+      lspconfig.tailwindcss.setup({
+        capabilities = capabilities,
+        filetypes = {
+          "astro",
+          "css",
+          "html",
+          "javascript",
+          "javascriptreact",
+          "less",
+          "sass",
+          "scss",
+          "svelte",
+          "typescript",
+          "typescriptreact",
+          "vue",
+        },
+      })
+
+      -- TypeScript
+      lspconfig.ts_ls.setup({
+        capabilities = capabilities,
+        filetypes = {
+          "astro",
+          "javascript",
+          "typescript",
+          "vue",
+        },
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
