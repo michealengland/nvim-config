@@ -90,11 +90,16 @@ return {
       -- PHP Intelephense
       -- Requires PHPCS & Local clone of WordPress.
       -- gh repo clone WordPress/WordPress
+      -- NOTE: intelephense covers additional PHP errors that phpcs does not.
       lspconfig.intelephense.setup({
         capabilities = capabilities,
         filetypes = { "php" },
         settings = {
           intelephense = {
+            -- For debugging PHPCS disable intelephense.
+            -- diagnostics = {
+            --   enable = false,
+            -- },
             files = {
               maxSize = 1000000,
             },

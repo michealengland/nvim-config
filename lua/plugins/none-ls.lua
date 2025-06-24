@@ -10,21 +10,19 @@ return {
           -- Verify your PHPCS works:
           --   Global Scope:  phpcs --standard=WordPress-Core path/to/file.php
           --   Project Scope: /vendor/bin/phpcs --standard=WordPress-Core path/to/file.php
+          --   NOTE: intelephense covers additional errors that PHPCS does not catch.
           command = "./vendor/bin/phpcs",
           filetypes = { "php" },
-          args = {
-            "--standard=WordPress",
-            "--report=json",
-            "--stdin-path=$FILENAME",
-            "-",
-          },
-          to_stdin = true,
         }),
 
         -- PHPCBF PHP Code Beautifier (Formatter)
         null_ls.builtins.formatting.phpcbf.with({
           command = "./vendor/bin/phpcbf",
-          args = { "--standard=WordPress-Core", "-" },
+          args = {
+            -- Not specifiying a standard defaults phpcs.xml.
+            -- "--standard=WordPress-Extra",
+            "-",
+          },
           to_stdin = true,
           extra_args = {}, -- <- Silences most warnings
         }),
