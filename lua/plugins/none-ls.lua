@@ -21,7 +21,7 @@ return {
         -- PHPCBF PHP Code Beautifier (Formatter)
         null_ls.builtins.formatting.phpcbf.with({
           command = "./vendor/bin/phpcbf",
-          args = { "--standard=WordPress", "-" },
+          args = { "--standard=WordPress-Core", "-" },
           to_stdin = true,
           extra_args = {}, -- <- Silences most warnings
         }),
