@@ -13,3 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("lazy").setup("plugins")
+
+-- Neovim Diagnostic Options
+-- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
+vim.diagnostic.config({
+  update_in_insert = true,  -- Update diagnostics in Insert mode
+  virtual_text = true,      -- Render inline error text
+})
