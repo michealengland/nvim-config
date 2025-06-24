@@ -77,7 +77,7 @@ return {
               indentHandlebars = true,
               indentInnerHtml = true,
               insertSpaces = true,
-              maxPreserveNewLines = 0, -- explicitly limit preserved newlines
+              maxPreserveNewLines = 0,  -- explicitly limit preserved newlines
               preserveNewLines = false, -- prevent blank lines
               tabSize = 2,
               unformatted = "pre,code,span",
@@ -92,12 +92,13 @@ return {
       -- gh repo clone WordPress/WordPress
       lspconfig.intelephense.setup({
         capabilities = capabilities,
+        filetypes = { "php" },
         settings = {
           intelephense = {
             files = {
               maxSize = 1000000,
             },
-            format = { enable = false }, -- if you're using phpcbf
+            format = { enable = false }, -- Disable auto format on save.
             environment = {
               includePaths = {
                 vim.fn.expand("~/.intelephense/wp-src/wp-includes"),
