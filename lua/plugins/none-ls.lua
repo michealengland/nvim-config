@@ -6,16 +6,19 @@ return {
       sources = {
         -- PHPCS diagnostics
         null_ls.builtins.diagnostics.phpcs.with({
-          command = "phpcs",
+          -- Use command = phpcs for global or command = "./vendor/bin/phpcs" for project scoped.
+          -- Verify your PHPCS works:
+          --   Global Scope:  phpcs --standard=WordPress-Core path/to/file.php
+          --   Project Scope: /vendor/bin/phpcs --standard=WordPress-Core path/to/file.php
+          command = "./vendor/bin/phpcs",
+          filetypes = { "php" },
           args = {
-            "--standard=phpcs.xml",
-            "--report=emacs",
+            "--standard=WordPress",
+            "--report=json",
+            "--stdin-path=$FILENAME",
             "-",
           },
-          -- Ensures PHPCS uses project root phpcs.xml
-          cwd = function(params)
-            return vim.fn.getcwd()
-          end,
+          to_stdin = true,
         }),
 
         -- PHPCBF PHP Code Beautifier (Formatter)
