@@ -18,6 +18,7 @@ return {
         ensure_installed = {
           "astro",
           "cssls",
+          "eslint",
           "html",
           "intelephense",
           "lua_ls",
@@ -45,6 +46,22 @@ return {
           typescript = {
             tsdk = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
           },
+        },
+      })
+
+      -- ESLint
+      lspconfig.eslint.setup({
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+          })
+        end,
+        settings = {
+          javascript = { validate = true },
+          format = { enable = true }, -- let ESLint handle formatting
+          lintTask = { enable = true },
         },
       })
 
