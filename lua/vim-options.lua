@@ -31,6 +31,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.o.list = true
 vim.o.listchars = "tab: →,lead:.,trail:."
 vim.g.background = "light"
+vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
 
 -- Navigate vim panes with motions.
