@@ -117,6 +117,13 @@ return {
       -- Lua
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" }, -- Recognize vim global variable.
+            },
+          },
+        },
       })
 
       -- Stylelint
