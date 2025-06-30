@@ -22,6 +22,8 @@ return {
           "intelephense",
           "lua_ls",
           "stylelint_lsp",
+          "somesass_ls",
+          "some-sass-language-server",
           "tailwindcss",
           "ts_ls",
         },
@@ -139,6 +141,11 @@ return {
         on_attach = function(client)
           client.server_capabilities.document_formatting = false
         end,
+      })
+
+      -- Sass, used for SCSS intellesense
+      lspconfig.somesass_ls.setup({
+        filetypes = { "sass", "scss", "less", "css" },
       })
 
       -- TailwindCSS Intelliesense
