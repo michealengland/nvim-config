@@ -23,7 +23,6 @@ return {
           "lua_ls",
           "stylelint_lsp",
           "somesass_ls",
-          "some-sass-language-server",
           "tailwindcss",
           "ts_ls",
         },
