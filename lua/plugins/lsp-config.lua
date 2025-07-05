@@ -20,9 +20,10 @@ return {
           "cssls",
           "html",
           "intelephense",
+          "jsonls",
           "lua_ls",
-          "stylelint_lsp",
           "somesass_ls",
+          "stylelint_lsp",
           "tailwindcss",
           "ts_ls",
         },
@@ -114,6 +115,9 @@ return {
           },
         },
       })
+
+      -- JSON
+      lspconfig.jsonls.setup({})
 
       -- Lua
       lspconfig.lua_ls.setup({
