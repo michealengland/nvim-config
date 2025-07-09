@@ -9,7 +9,7 @@ return {
       -- https://github.com/nvim-lualine/lualine.nvim?tab=readme-ov-file#available-components
       -- Top bar customization.
       tabline = {
-        lualine_a = { "buffers" },
+        lualine_a = { { "buffers", show_filename_only = false } },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
