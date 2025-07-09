@@ -9,7 +9,7 @@ return {
       -- https://github.com/nvim-lualine/lualine.nvim?tab=readme-ov-file#available-components
       -- Top bar customization.
       tabline = {
-        lualine_a = { { "filename", path = 1 } }, -- Display full path.
+        lualine_a = { "buffers" },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
@@ -20,7 +20,7 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
-        lualine_c = { "filename" },
+        lualine_c = { { "filename", path = 1 } }, -- Display full path.
         lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
