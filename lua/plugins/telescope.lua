@@ -17,6 +17,11 @@ return {
         find_files = {
           theme = "ivy",
         },
+        live_grep = {
+          additional_args = function()
+            return { "--fixed-strings" }
+          end,
+        },
       },
       extensions = {
         fzf = {},
