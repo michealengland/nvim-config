@@ -17,8 +17,8 @@ vim.wo.relativenumber = true
 -- ASCII Symbol Picker https://symbl.cc/en/002E/
 -- See Available Colors `:h cterm-colors`
 vim.cmd([[
-  highlight SpecialKey ctermfg=Black guifg=#6272a4
-  highlight NonText ctermfg=Black guifg=#6272a4
+  highlight Whitespace ctermfg=242 guifg=#393552
+  highlight SpecialKey ctermfg=242 guifg=#393552
 ]])
 vim.api.nvim_set_hl(0, "TrailingWhitespace", { bg = "LightRed" })
 vim.api.nvim_create_autocmd("BufEnter", {
